@@ -26,7 +26,8 @@ const renderBoard = () => {
         clearInterval(interval)
         document.getElementById("msg").innerHTML = "well done";
     }
-    if (emptyCell - ((size - 1) * 4) === 0) {
+    if ((emptyCell - ((size - 1) * 4) + 1 === 0 && (gamerPos.i === 0 || gamerPos.i === size - 1 || gamerPos.j === 0 || gamerPos.j === size - 1)) ||
+        emptyCell - ((size - 1) * 4) === 0 && (gamerPos.i !== 0 && gamerPos.i !== size - 1 && gamerPos.j !== 0 && gamerPos.j !== size - 1)) {
         document.body.onkeyup = null;
         clearInterval(interval)
         document.getElementById("msg").innerHTML = "game over";

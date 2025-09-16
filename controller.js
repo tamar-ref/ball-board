@@ -34,6 +34,9 @@ const createMat = () => {
             let cell = { type: "floor", ball: false }
             if (i === 0 || i === mat.length - 1 || j === 0 || j === mat[i].length - 1) {
                 cell.type = "wall";
+                if (i === Math.floor(size / 2) || j === Math.floor(size / 2)) {
+                    cell.type = "floor";
+                }
             }
             mat[i][j] = cell;
         }
@@ -60,18 +63,20 @@ function handleKey(event) {
 }
 
 function moveTo(i, j) {
-    if (i === 0) {
-        i = 1;
+    if (i < 0 && j === Math.floor(size / 2)) {
+        i = size - 1;
     }
-    if (i === size - 1) {
-        i = size - 2;
+    else if (i >= size && j === Math.floor(size / 2)) {
+        i = 0;
     }
-    if (j === 0) {
-        j = 1;
+    if (j < 0 && i === Math.floor(size / 2)) {
+        j = size - 1;
     }
-    if (j === size - 1) {
-        j = size - 2;
+    else if (j >= size && i === Math.floor(size / 2)) {
+        j = 0;
     }
+    if (i < 0 || i >= size || j < 0 || j >= size) return;
+    if (mat[i][j].type === "wall") return;
     gamerPos.i = i;
     gamerPos.j = j;
     if (mat[i][j].ball === true) {
@@ -82,8 +87,15 @@ function moveTo(i, j) {
     renderBoard();
 }
 
-function newGame() {
+function restart() {
+    document.body.onkeyup = function (event) {
+        handleKey(event);
+    };
     document.getElementById("msg").innerHTML = ""
     clearInterval(interval);
+    gamerPos = {
+        i: Math.floor(Math.random() * (size - 2)) + 1,
+        j: Math.floor(Math.random() * (size - 2)) + 1,
+    };
     initGame();
 }
