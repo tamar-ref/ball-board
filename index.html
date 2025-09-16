@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>catch the balls</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body onkeyup="handleKey(event)" onload="initGame()">
+    <h2 id="points"></h2>
+    <p id="balls"></p>
+    <table id="board"></table>
+    <br>
+    <button onclick="newGame()">new game</button>
+    <h1 id="msg"></h1>
+</body>
+<script src="controller.js"></script>
+<script src="model.js"></script>
+<script src="view.js"></script>
+
+</html>
